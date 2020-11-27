@@ -1,12 +1,14 @@
 <template>
   <profile/>
 </template>
-<script>
+<script lang="ts">
 
-import profile from '@/components/user/profile';
-export default {
+import profile from '@/components/user/profile.vue';
+import {Vue} from "vue-property-decorator";
+
+export default Vue.extend({
   components: {
     profile,
   },
-};
+});
 </script>

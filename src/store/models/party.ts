@@ -1,14 +1,19 @@
 import User from "@/store/models/user";
 
+import { party } from "@/store/interfaces/interfaces";
+
 class Party {
-    data = {
-        id: null,
-        permissions: null,
-        user: null,
-        createdAt: null,
+    data: party = {
+        id: '',
+        permissions: '',
+        user: {
+            id: '',
+            username: '',
+        },
+        createdAt: '',
     };
 
-    constructor(partyData) {
+    constructor(partyData: party) {
         this.data.id = partyData.id;
         this.data.permissions = partyData.permissions;
         this.data.user = new User(partyData.user).data;

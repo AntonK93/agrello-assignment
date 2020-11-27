@@ -1,17 +1,20 @@
 import UserService from '@/services/user.service';
+import {Module} from "vuex";
 
-export default {
+import { userData } from "@/store/interfaces/interfaces";
+
+const userModule: Module<any, any> = {
     namespaced: true,
     state: {
-        userData: {
-            dateOfBirth: null,
-            firstName: null,
-            lastName: null,
-            identifier: null,
+        userData:  {
+            dateOfBirth: '',
+            firstName: '',
+            lastName: '',
+            identifier: '',
         },
     },
     mutations: {
-        userData(state, userData) {
+        userData(state, userData: userData) {
             state.userData.firstName = userData.firstName;
             state.userData.lastName = userData.lastName;
             state.userData.identifier = userData.identifier;
@@ -19,7 +22,7 @@ export default {
         },
     },
     actions: {
-        getUserInfo({ commit }) {
+        getUserInfo({ commit }): Promise<userData> {
             return UserService.getUserInfo()
                 .then((res) => {
                     commit('userData', res);
@@ -28,3 +31,5 @@ export default {
         },
     },
 };
+
+export default userModule;

@@ -21,10 +21,10 @@ const store = new Vuex.Store({
         },
     },
     actions: {
-        init({ dispatch }) {
+        init({ dispatch }): void {
             dispatch('auth/init');
         },
-        setLoading({ commit }, loading) {
+        setLoading({ commit }, loading): void {
             commit('loading', loading);
         }
     },

@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <vue-progress-bar></vue-progress-bar>
-      <router-view/>
+    <router-view/>
     <notifications/>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'app',
 };

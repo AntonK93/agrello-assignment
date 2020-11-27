@@ -8,11 +8,13 @@
 
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {Vue} from "vue-property-decorator";
+
+export default Vue.extend({
   props: {
     data: {},
   },
-};
+});
 </script>

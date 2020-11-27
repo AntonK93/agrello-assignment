@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { stringify } from 'qs';
 import config from '@/config/app.config';
 import NotificationService from "@/services/notification.service";
+const qs = require('qs');
 
 class AuthService {
 
@@ -13,20 +13,20 @@ class AuthService {
         }
     });
 
-    getAccessToken(code) {
-        return this.authInstance.post('token', stringify({
+    getAccessToken(code: string): Promise<any> {
+        return this.authInstance.post('token', qs.stringify({
             grant_type: 'authorization_code',
             code: code,
             client_id: config.auth_data.client_id,
             redirect_uri: config.app_url+config.auth_data.redirect_to_route,
         }))
-            .catch((error) => {
-                NotificationService.error(error.response.data.error_description, 'Error');
-                throw error;
-            })
             .then((res) => {
                 NotificationService.success('Successfully authenticated!');
                 return res.data;
+            })
+            .catch((error) => {
+                NotificationService.error(error.response.data.error_description, 'Error');
+                throw error;
             });
     }
 }

@@ -50,27 +50,28 @@
 
 </template>
 
-<script>
+<script lang="ts">
 
-import containers from '@/components/user/documentContainer/containers';
 import {mapState} from 'vuex';
+import {Vue} from "vue-property-decorator";
+import containers from "@/components/user/documentContainer/containers.vue";
 
-export default {
+export default Vue.extend({
   components: {
     containers,
   },
   computed: {
-    ...mapState({
-      userData: state => state.user.userData,
-    }),
+    ...mapState('user', [
+      'userData',
+    ]),
     fullName() {
       const fullName = this.userData.firstName + ' ' + this.userData.lastName;
       return fullName.toLowerCase();
     },
   },
   mounted() {
-    this.$store.dispatch('user/getUserInfo')
+    this.$store.dispatch('user/getUserInfo');
     this.$store.dispatch('containers/getUserContainerList');
   },
-};
+});
 </script>

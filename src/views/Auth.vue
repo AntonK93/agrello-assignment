@@ -5,19 +5,21 @@
     </transition>
   </div>
 </template>
-<script>
-import authForm from '@/components/auth/authForm';
+
+<script lang="ts">
+import authForm from '@/components/auth/authForm.vue';
 import {mapState} from "vuex";
 import store from "@/store/store";
+import {Vue} from "vue-property-decorator";
 
-export default {
+export default Vue.extend({
   components: {
     authForm,
   },
   computed: {
-    ...mapState({
-      loggedIn: state => state.auth.loggedIn,
-    }),
+    ...mapState('auth', [
+      'loggedIn',
+    ]),
   },
   watch: {
     loggedIn(newValue) {
@@ -27,7 +29,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    if (store.state.auth.loggedIn) {
+    if (store.getters['auth/loggedIn']) {
       next('/');
     }
     next();
@@ -40,5 +42,5 @@ export default {
           })
     }
   }
-};
+});
 </script>

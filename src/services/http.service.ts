@@ -1,22 +1,22 @@
 import axios from 'axios';
-import { stringify } from 'qs';
 import app from '@/main';
 import config from '@/config/app.config';
 import NotificationService from '@/services/notification.service';
-import VueCookies from 'vue-cookies';
+import Vue from "vue";
+const qs = require('qs');
+
 
 const instance = axios.create({
     baseURL: config.api_url,
-    paramsSerializer: params => stringify(params),
+    paramsSerializer: params => qs.stringify(params),
 });
 
 instance.interceptors.request.use((request) => {
-    if (typeof request.hideLoading === 'undefined' || !request.hideLoading) {
-        app.$Progress.start();
-        app.$store.dispatch('setLoading', true);
-    }
 
-    const token = VueCookies.get('access-token');
+    Vue.prototype.$Progress.start();
+    app.$store.dispatch('setLoading', true);
+
+    const token = Vue.prototype.$cookies.get('access-token');
 
     if (token) {
         request.headers.Authorization = `Bearer ${token}`;
@@ -24,7 +24,7 @@ instance.interceptors.request.use((request) => {
 
     return request;
 }, (error) => {
-    app.$Progress.finish();
+    Vue.prototype.$Progress.finish();
     app.$store.dispatch('setLoading', false);
 
     NotificationService.error('Network error. Check your connection');
@@ -32,7 +32,7 @@ instance.interceptors.request.use((request) => {
 });
 
 instance.interceptors.response.use((response) => {
-    app.$Progress.finish();
+    Vue.prototype.$Progress.finish();
     app.$store.dispatch('setLoading', false);
 
     // Show Api errors
@@ -45,7 +45,7 @@ instance.interceptors.response.use((response) => {
 
     return response;
 }, (error) => {
-    app.$Progress.finish();
+    Vue.prototype.$Progress.finish();
     app.$store.dispatch('setLoading', false);
 
     if (typeof error.response === 'undefined'
@@ -74,7 +74,7 @@ instance.interceptors.response.use((response) => {
     }
 
     // Api errors that are returned with error codes
-    NotificationService.stickyError(error.response.data.message);
+    NotificationService.stickyError(error.response.data.message, '');
     return Promise.reject(error);
 });
 

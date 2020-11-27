@@ -11,18 +11,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import store from '../../store/store';
 import {mapState} from "vuex";
+import {Vue} from "vue-property-decorator";
 
-export default {
+export default Vue.extend({
   computed: {
-    ...mapState({
-      loggedIn: state => state.auth.loggedIn,
-    }),
+    ...mapState('auth', [
+      'loggedIn',
+    ]),
   },
   beforeRouteEnter: (to, from, next) => {
-    if (!store.state.auth.loggedIn) {
+    if (!store.getters['auth/loggedIn']) {
       next('/auth');
     }
     next();
@@ -34,5 +35,5 @@ export default {
       }
     }
   },
-};
+});
 </script>

@@ -1,9 +1,15 @@
 import Container from "@/store/models/container";
+import { container } from "@/store/interfaces/interfaces";
 
 class ContainerCollection {
-    containers = [];
+    containers: Array<Container> = [];
 
-    push(containers) {
+    set(containers: Array<container>) {
+        this.containers = [];
+        this.push(containers);
+    }
+
+    push(containers: Array<container>): void {
         containers.forEach(container => {
             const findContainer = this.find(container.id);
             const index = this.containers.indexOf(findContainer);
@@ -15,13 +21,13 @@ class ContainerCollection {
         });
     }
 
-    find(id) {
+    find(id: string): Container {
         return this.containers.filter(container => {
             return container.data.id === id;
         })[0];
     }
 
-    all() {
+    all(): Array<container> {
         return this.containers.map(container => {
             return container.data;
         });

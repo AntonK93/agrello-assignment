@@ -1,33 +1,34 @@
 import config from '@/config/app.config';
 import AuthService from '@/services/auth.service';
-import VueCookies from 'vue-cookies';
+import Vue from 'vue'
+import {Module} from "vuex";
 
-export default {
+const authModule: Module<any, any> = {
     namespaced: true,
     state: {
         loggedIn: false,
     },
     mutations: {
-        loggedIn(state, loggedIn) {
+        loggedIn(state, loggedIn: boolean) {
             state.loggedIn = loggedIn;
             if (!loggedIn) {
-                VueCookies.remove('access-token');
+                Vue.prototype.$cookies.remove('access-token');
             }
         },
     },
     actions: {
-        init({ dispatch }) {
-            if (VueCookies.get('access-token')) {
+        init({ dispatch }): void {
+            if (Vue.prototype.$cookies.get('access-token')) {
                 dispatch('setLoggedIn', true);
             }
         },
-        setLoggedIn({ commit }, isLoggedIn) {
+        setLoggedIn({ commit }, isLoggedIn: boolean): void {
             commit('loggedIn', isLoggedIn);
         },
-        getAccessToken({ commit }, code) {
+        getAccessToken({ commit }, code): Promise<any> {
             return AuthService.getAccessToken(code)
                 .then((res) => {
-                    VueCookies.set('access-token', res['access_token'], res['expires_in']);
+                    Vue.prototype.$cookies.set('access-token', res['access_token'], res['expires_in']);
                     commit('loggedIn', true);
                     return res;
                 })
@@ -37,9 +38,12 @@ export default {
         },
     },
     getters: {
-        authLink() {
+        loggedIn(state): boolean {
+            return state.loggedIn;
+        },
+        authLink(): string {
             let url = `${config.auth_data.auth_url}authorize?`;
-            const params = {
+            const params: { [char: string]: string } = {
                 response_type: 'code',
                 client_id: config.auth_data.client_id,
                 redirect_uri: config.app_url+config.auth_data.redirect_to_route
@@ -54,3 +58,5 @@ export default {
         },
     },
 };
+
+export default authModule;

@@ -1,10 +1,12 @@
 <template>
   <container/>
 </template>
-<script>
+<script lang="ts">
 
-import container from '@/components/user/documentContainer/container';
-export default {
+import container from '@/components/user/documentContainer/container.vue';
+import {Vue} from "vue-property-decorator";
+
+export default Vue.extend({
   components: {
     container,
   },
@@ -14,5 +16,5 @@ export default {
           this.$router.push('/profile');
         });
   }
-};
+});
 </script>

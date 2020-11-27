@@ -23,11 +23,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
 import {mapGetters} from "vuex";
-import { formatBytes, handleDate }  from '@/utils/helper';
-export default {
+import { formatBytes, formatData }  from '@/utils/helper';
+import {Vue} from "vue-property-decorator";
+
+export default Vue.extend({
+  components: {
+    'vue-good-table': require('vue-good-table').VueGoodTable,
+  },
   data() {
     return {
       columns: [
@@ -49,8 +54,8 @@ export default {
           label: 'Date',
           field: 'createdAt',
           type: 'date',
-          formatFn(value) {
-            return handleDate(value);
+          formatFn(value: string) {
+            return formatData(value);
           }
         },
       ],
@@ -65,9 +70,9 @@ export default {
     formatBytes,
   },
   methods: {
-    onRowClick(params) {
+    onRowClick(params: any) {
       this.$router.push({ name: 'container', params: { id: params.row.id } })
     },
   }
-};
+});
 </script>

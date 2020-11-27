@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 class NotificationService {
-    success(text, title = 'Success!') {
+    success(text: string, title = 'Success!'): void {
         return Vue.notify({
             type: 'success',
             title,
@@ -9,7 +9,7 @@ class NotificationService {
         });
     }
 
-    error(text, title = 'Error!') {
+    error(text: string, title = 'Error!'): void {
         return Vue.notify({
             type: 'error',
             title,
@@ -17,7 +17,7 @@ class NotificationService {
         });
     }
 
-    stickyError(text, title) {
+    stickyError(text: string, title: string): void {
         return this.error(text, title);
     }
 }

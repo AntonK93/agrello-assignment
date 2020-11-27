@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const formatBytes = (bytes, decimals = 2) => {
+export const formatBytes = (bytes: number, decimals = 2) => {
         if (bytes === 0) return '0 Bytes';
 
         const k = 1024;
@@ -12,6 +12,6 @@ export const formatBytes = (bytes, decimals = 2) => {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-export const handleDate = (date) => {
+export const formatData = (date: string) => {
     return moment(date).format('YYYY-MM-DD hh:mm');
 }

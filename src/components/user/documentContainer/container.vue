@@ -5,7 +5,7 @@
         <div class="card card-body">
             <h6 class="d-flex align-items-center mb-3">Document container: {{ container.name }}</h6>
             <div>
-              <div>Created at: {{ handleDate(container.createdAt) }}</div>
+              <div>Created at: {{ container.createdAt | formatData }}</div>
               <div>Size: {{ container.size | formatBytes }}</div>
               <div class="d-flex justify-content-between">
                 <div class="card card-body bg-light m-2">
@@ -23,13 +23,15 @@
 
 </template>
 
-<script>
+<script lang="ts">
 
 import {mapGetters} from "vuex";
-import files from "@/components/user/documentContainer/files";
-import parties from "@/components/user/documentContainer/parties";
-import { formatBytes, handleDate }  from '@/utils/helper';
-export default {
+import files from "@/components/user/documentContainer/files.vue";
+import parties from "@/components/user/documentContainer/parties.vue";
+import { formatBytes, formatData }  from '@/utils/helper';
+import {Vue} from "vue-property-decorator";
+
+export default Vue.extend({
   components: {
     files,
     parties
@@ -41,12 +43,7 @@ export default {
   },
   filters: {
     formatBytes,
+    formatData,
   },
-  methods: {
-    handleDate,
-    moment(date) {
-      return moment(date).format('YYYY-MM-DD hh:mm');
-    }
-  }
-};
+});
 </script>

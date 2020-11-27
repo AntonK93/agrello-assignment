@@ -1,13 +1,15 @@
+import { file } from "@/store/interfaces/interfaces";
+
 class File {
-    data = {
-        id: null,
-        name: null,
-        mimeType: null,
-        size: null,
-        createdAt: null,
+    data: file = {
+        id: '',
+        name: '',
+        mimeType: '',
+        size: 0,
+        createdAt: '',
     };
 
-    constructor(fileData) {
+    constructor(fileData: file) {
         this.data.id = fileData.id;
         this.data.name = fileData.name;
         this.data.mimeType = fileData.mimeType;

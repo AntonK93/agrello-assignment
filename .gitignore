@@ -17,7 +17,7 @@ yarn-error.log*
 *.sw?
 
 # Config files
-src/config/app.config.js
+src/config/app.config.ts
 public/.htaccess
 build.config.json
 vue.config.js

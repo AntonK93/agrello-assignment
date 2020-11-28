@@ -1,4 +1,5 @@
 import { user } from "@/store/interfaces/interfaces";
+
 class User {
     data: user = {
         id: '',

@@ -4,7 +4,7 @@ import { container } from "@/store/interfaces/interfaces";
 class ContainerCollection {
     containers: Array<Container> = [];
 
-    set(containers: Array<container>) {
+    set(containers: Array<container>): void {
         this.containers = [];
         this.push(containers);
     }

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h6>Files ({{ data.length }})</h6>
-    <div v-for="file in data" :key="file.id" class="card card-body mb-2 p-3">
-      <span>Name: {{ file.name }}</span>
-      <span>Size: {{ file.size | formatBytes }}</span>
-      <span>Created At: {{ file.createdAt | formatData }}</span>
+    <h6>Files ({{ files.length }})</h6>
+    <div v-for="fileElement in files" :key="fileElement.id" class="card card-body mb-2 p-3">
+      <span>Name: {{ fileElement.name }}</span>
+      <span>Size: {{ fileElement.size | formatBytes }}</span>
+      <span>Created At: {{ fileElement.createdAt | formatData }}</span>
     </div>
   </div>
 
@@ -12,11 +12,12 @@
 
 <script lang="ts">
 import { formatBytes, formatData } from '@/utils/helper';
-import {Vue} from "vue-property-decorator";
+import { file } from "@/store/interfaces/interfaces";
+import Vue from 'vue';
 
 export default Vue.extend({
   props: {
-    data: {},
+    files: Object as () => Array<file>,
   },
   filters: {
     formatBytes,

@@ -15,12 +15,13 @@
 <script lang="ts">
 
 import { mapGetters } from 'vuex';
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
   computed: {
     ...mapGetters({
       authLink: 'auth/authLink',
     }),
   },
-};
+});
 </script>

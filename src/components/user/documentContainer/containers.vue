@@ -27,7 +27,7 @@
 
 import {mapGetters} from "vuex";
 import { formatBytes, formatData }  from '@/utils/helper';
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 
 export default Vue.extend({
   components: {
@@ -70,7 +70,7 @@ export default Vue.extend({
     formatBytes,
   },
   methods: {
-    onRowClick(params: any) {
+    onRowClick(params: any): void {
       this.$router.push({ name: 'container', params: { id: params.row.id } })
     },
   }

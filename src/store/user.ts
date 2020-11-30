@@ -6,7 +6,7 @@ import { userData } from "@/store/interfaces/interfaces";
 const userModule: Module<any, any> = {
     namespaced: true,
     state: {
-        userData:  {
+        userData:   {
             dateOfBirth: '',
             firstName: '',
             lastName: '',

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h6>Participants ({{ data.length }})</h6>
-    <div v-for="participant in data" :key="participant.id" class="card card-body mb-2 p-3">
+    <h6>Participants ({{ participants.length }})</h6>
+    <div v-for="participant in participants" :key="participant.id" class="card card-body mb-2 p-3">
       <span>Email: {{ participant.user.username }}</span>
     </div>
   </div>
@@ -10,11 +10,12 @@
 
 <script lang="ts">
 
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
+import {party} from "@/store/interfaces/interfaces";
 
 export default Vue.extend({
   props: {
-    data: {},
+    participants: Object as () => Array<party>,
   },
 });
 </script>

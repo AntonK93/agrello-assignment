@@ -14,7 +14,7 @@
 <script lang="ts">
 import store from '../../store/store';
 import {mapState} from "vuex";
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 
 export default Vue.extend({
   computed: {

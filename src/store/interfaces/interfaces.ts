@@ -1,6 +1,6 @@
 interface container {
-    id: string;
-    name: string;
+    id: string,
+    name: string,
     size: number,
     createdAt: string,
     parties: Array<party>,

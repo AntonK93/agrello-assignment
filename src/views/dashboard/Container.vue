@@ -4,7 +4,7 @@
 <script lang="ts">
 
 import container from '@/components/user/documentContainer/container.vue';
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 
 export default Vue.extend({
   components: {

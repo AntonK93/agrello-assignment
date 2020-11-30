@@ -9,10 +9,10 @@
               <div>Size: {{ container.size | formatBytes }}</div>
               <div class="d-flex justify-content-between">
                 <div class="card card-body bg-light m-2">
-                  <files :data="container.files"/>
+                  <files :files="container.files"/>
                 </div>
                 <div class="card card-body bg-light m-2">
-                  <parties :data="container.parties"/>
+                  <parties :participants="container.parties"/>
                 </div>
               </div>
             </div>
@@ -29,7 +29,7 @@ import {mapGetters} from "vuex";
 import files from "@/components/user/documentContainer/files.vue";
 import parties from "@/components/user/documentContainer/parties.vue";
 import { formatBytes, formatData }  from '@/utils/helper';
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 
 export default Vue.extend({
   components: {

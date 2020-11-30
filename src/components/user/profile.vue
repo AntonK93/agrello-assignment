@@ -53,7 +53,7 @@
 <script lang="ts">
 
 import {mapState} from 'vuex';
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 import containers from "@/components/user/documentContainer/containers.vue";
 
 export default Vue.extend({

@@ -10,7 +10,7 @@
 import authForm from '@/components/auth/authForm.vue';
 import {mapState} from "vuex";
 import store from "@/store/store";
-import {Vue} from "vue-property-decorator";
+import Vue from 'vue';
 
 export default Vue.extend({
   components: {
